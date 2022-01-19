@@ -1,0 +1,12 @@
+swagger: '2.0'
+type: object
+description: Header comics, embedded in other objects
+properties:
+  uid:
+    type: string
+    required: true
+    description: Comics unique ID
+  title:
+    type: string
+    required: true
+    description: Comics title

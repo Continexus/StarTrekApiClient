@@ -1,0 +1,12 @@
+swagger: '2.0'
+type: string
+description: Marital status
+enum:
+  - SINGLE
+  - ENGAGED
+  - MARRIED
+  - DIVORCED
+  - REMARRIED
+  - SEPARATED
+  - WIDOWED
+  - CAPTAINS_WOMAN

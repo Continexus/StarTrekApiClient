@@ -1,0 +1,12 @@
+swagger: '2.0'
+type: object
+description: Header weapon, embedded in other objects
+properties:
+  uid:
+    type: string
+    required: true
+    description: Weapon unique ID
+  name:
+    type: string
+    required: true
+    description: Weapon name

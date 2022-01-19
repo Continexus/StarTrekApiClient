@@ -1,0 +1,12 @@
+swagger: '2.0'
+type: object
+description: Header season, embedded in other objects
+properties:
+  uid:
+    type: string
+    required: true
+    description: Season unique ID
+  title:
+    type: string
+    required: true
+    description: Season title
