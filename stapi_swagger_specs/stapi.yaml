@@ -1,0 +1,2339 @@
+swagger: '2.0'
+info:
+  title: STAPI
+  version: '1.0.0'
+host: stapi.co
+schemes:
+  - http
+basePath: /api/v1/rest
+produces:
+  - application/json
+paths:
+  /animal:
+    get:
+      description: Retrival of a single animal
+      parameters:
+        - name: uid
+          in: query
+          type: string
+          required: true
+          description: Animal unique ID
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AnimalFullResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - Animal
+  /animal/search:
+    get:
+      description: Pagination over animals
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AnimalBaseResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - Animal
+    post:
+      description: Searching animals
+      consumes:
+        - application/x-www-form-urlencoded
+      producers:
+        - application/json
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: sort
+          type: string
+          in: query
+          description: "Sorting, serialized like this: fieldName,ASC;anotherFieldName,DESC"
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+        - name: name
+          in: formData
+          type: string
+          description: Animal name
+        - name: earthAnimal
+          in: formData
+          type: boolean
+          description: Whether it should be an earth animal
+        - name: earthInsect
+          in: formData
+          type: boolean
+          description: Whether it should be an earth insect
+        - name: avian
+          in: formData
+          type: boolean
+          description: Whether it should be an avian
+        - name: canine
+          in: formData
+          type: boolean
+          description: Whether it should be a canine
+        - name: feline
+          in: formData
+          type: boolean
+          description: Whether it should be a feline
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AnimalBaseResponse'
+      tags:
+        - Animal
+  /astronomicalObject:
+    get:
+      description: Retrival of a single astronomical object
+      parameters:
+        - name: uid
+          in: query
+          type: string
+          required: true
+          description: Astronomical object's unique ID
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AstronomicalObjectFullResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - AstronomicalObject
+  /astronomicalObject/search:
+    get:
+      description: Pagination over astronomical objects
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AstronomicalObjectBaseResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - AstronomicalObject
+    post:
+      description: Searching astronomical objects
+      consumes:
+        - application/x-www-form-urlencoded
+      producers:
+        - application/json
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: sort
+          type: string
+          in: query
+          description: "Sorting, serialized like this: fieldName,ASC;anotherFieldName,DESC"
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+        - name: name
+          in: formData
+          type: string
+          description: Astronomical object name
+        - name: astronomicalObjectType
+          in: formData
+          type: string
+          description: Type of astronomical object
+        - name: locationUid
+          in: formData
+          type: string
+          description: Unique ID of astronomical object containing objects being searched
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/AstronomicalObjectBaseResponse'
+      tags:
+        - AstronomicalObject
+  /book:
+    get:
+      description: Retrival of a single book
+      parameters:
+        - name: uid
+          in: query
+          type: string
+          required: true
+          description: Book unique ID
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookFullResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - Book
+  /book/search:
+    get:
+      description: Pagination over books
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookBaseResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - Book
+    post:
+      description: Searching books
+      consumes:
+        - application/x-www-form-urlencoded
+      producers:
+        - application/json
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: sort
+          type: string
+          in: query
+          description: "Sorting, serialized like this: fieldName,ASC;anotherFieldName,DESC"
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+        - name: title
+          in: formData
+          type: string
+          description: Book title
+        - name: publishedYearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year the book was published
+        - name: publishedYearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year the book was published
+        - name: numberOfPagesFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Minimal number of pages
+        - name: numberOfPagesTo
+          in: formData
+          type: integer
+          format: int32
+          description: Maximal number of pages
+        - name: stardateFrom
+          in: formData
+          type: number
+          format: float
+          description: Starting stardate of book story
+        - name: stardateTo
+          in: formData
+          type: number
+          format: float
+          description: Ending stardate of book story
+        - name: yearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year of book story
+        - name: yearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year of book story
+        - name: novel
+          in: formData
+          type: boolean
+          description: Whether it should be a novel
+        - name: referenceBook
+          in: formData
+          type: boolean
+          description: Whether it should be a reference book
+        - name: biographyBook
+          in: formData
+          type: boolean
+          description: Whether it should be a biography book
+        - name: rolePlayingBook
+          in: formData
+          type: boolean
+          description: Whether it should be a role playing book
+        - name: eBook
+          in: formData
+          type: boolean
+          description: Whether it should be an e-book
+        - name: anthology
+          in: formData
+          type: boolean
+          description: Whether it should be an anthology
+        - name: novelization
+          in: formData
+          type: boolean
+          description: Whether it should be novelization
+        - name: audiobook
+          in: formData
+          type: boolean
+          description: Whether it should be an audiobook
+        - name: audiobookAbridged
+          in: formData
+          type: boolean
+          description: Whether it should be an audiobook, abridged
+        - name: audiobookPublishedYearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year the audiobook was published
+        - name: audiobookPublishedYearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year the audiobook was published
+        - name: audiobookRunTimeFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Minimal audiobook run time, in minutes
+        - name: audiobookRunTimeTo
+          in: formData
+          type: integer
+          format: int32
+          description: Maximal audiobook run time, in minutes
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookBaseResponse'
+      tags:
+        - Book
+  /bookCollection:
+    get:
+      description: Retrival of a single book collection
+      parameters:
+        - name: uid
+          in: query
+          type: string
+          required: true
+          description: Book collection unique ID
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookCollectionFullResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - BookCollection
+  /bookCollection/search:
+    get:
+      description: Pagination over book collections
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookCollectionBaseResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - BookCollection
+    post:
+      description: Searching book collections
+      consumes:
+        - application/x-www-form-urlencoded
+      producers:
+        - application/json
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: sort
+          type: string
+          in: query
+          description: "Sorting, serialized like this: fieldName,ASC;anotherFieldName,DESC"
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+        - name: title
+          in: formData
+          type: string
+          description: Book collection title
+        - name: publishedYearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year the book collection was published
+        - name: publishedYearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year the book collection was published
+        - name: numberOfPagesFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Minimal number of pages
+        - name: numberOfPagesTo
+          in: formData
+          type: integer
+          format: int32
+          description: Maximal number of pages
+        - name: stardateFrom
+          in: formData
+          type: number
+          format: float
+          description: Starting stardate of book collection stories
+        - name: stardateTo
+          in: formData
+          type: number
+          format: float
+          description: Ending stardate of book collections stories
+        - name: yearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year of book collection stories
+        - name: yearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year of book collections stories
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookCollectionBaseResponse'
+      tags:
+        - BookCollection
+  /bookSeries:
+    get:
+      description: Retrival of a single book series
+      parameters:
+        - name: uid
+          in: query
+          type: string
+          required: true
+          description: Book series unique ID
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookSeriesFullResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - BookSeries
+  /bookSeries/search:
+    get:
+      description: Pagination over book series
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookSeriesBaseResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+      - BookSeries
+    post:
+      description: Searching book series
+      consumes:
+        - application/x-www-form-urlencoded
+      producers:
+        - application/json
+      parameters:
+        - name: pageNumber
+          in: query
+          type: integer
+          format: int32
+          description: Zero-based page number
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: Page size
+        - name: sort
+          type: string
+          in: query
+          description: "Sorting, serialized like this: fieldName,ASC;anotherFieldName,DESC"
+        - name: apiKey
+          in: query
+          type: string
+          description: API key
+        - name: title
+          in: formData
+          type: string
+          description: Book series title
+        - name: publishedYearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year the book series was published
+        - name: publishedYearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year the book series was published
+        - name: numberOfBooksFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Minimal number of books
+        - name: numberOfBooksTo
+          in: formData
+          type: integer
+          format: int32
+          description: Maximal number of books
+        - name: yearFrom
+          in: formData
+          type: integer
+          format: int32
+          description: Starting year of book series stories
+        - name: yearTo
+          in: formData
+          type: integer
+          format: int32
+          description: Ending year of book series stories
+        - name: miniseries
+          in: formData
+          type: boolean
+          description: Whether it should be a miniseries
+        - name: eBookSeries
+          in: formData
+          type: boolean
+          description: Whether it should be an e-book series
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/BookSeriesBaseResponse'
+      tags:
+        - BookSeries
+#  /character:
+#    $ref: "./character/path/character.path.yaml"
+#  /character/search:
+#    $ref: "./character/path/characterSearch.path.yaml"
+#  /comics:
+#    $ref: "./comics/path/comics.path.yaml"
+#  /comics/search:
+#    $ref: "./comics/path/comicsSearch.path.yaml"
+#  /comicCollection:
+#    $ref: "./comic_collection/path/comicCollection.path.yaml"
+#  /comicCollection/search:
+#    $ref: "./comic_collection/path/comicCollectionSearch.path.yaml"
+#  /comicSeries:
+#    $ref: "./comic_series/path/comicSeries.path.yaml"
+#  /comicSeries/search:
+#    $ref: "./comic_series/path/comicSeriesSearch.path.yaml"
+#  /comicStrip:
+#    $ref: "./comic_strip/path/comicStrip.path.yaml"
+#  /comicStrip/search:
+#    $ref: "./comic_strip/path/comicStripSearch.path.yaml"
+#  /company:
+#    $ref: "./company/path/company.path.yaml"
+#  /company/search:
+#    $ref: "./company/path/companySearch.path.yaml"
+#  /conflict:
+#    $ref: "./conflict/path/conflict.path.yaml"
+#  /conflict/search:
+#    $ref: "./conflict/path/conflictSearch.path.yaml"
+#  /element:
+#    $ref: "./element/path/element.path.yaml"
+#  /element/search:
+#    $ref: "./element/path/elementSearch.path.yaml"
+#  /episode:
+#    $ref: "./episode/path/episode.path.yaml"
+#  /episode/search:
+#    $ref: "./episode/path/episodeSearch.path.yaml"
+#  /food:
+#    $ref: "./food/path/food.path.yaml"
+#  /food/search:
+#    $ref: "./food/path/foodSearch.path.yaml"
+#  /literature:
+#    $ref: "./literature/path/literature.path.yaml"
+#  /literature/search:
+#    $ref: "./literature/path/literatureSearch.path.yaml"
+#  /location:
+#    $ref: "./location/path/location.path.yaml"
+#  /location/search:
+#    $ref: "./location/path/locationSearch.path.yaml"
+#  /magazine:
+#    $ref: "./magazine/path/magazine.path.yaml"
+#  /magazine/search:
+#    $ref: "./magazine/path/magazineSearch.path.yaml"
+#  /magazineSeries:
+#    $ref: "./magazine_series/path/magazineSeries.path.yaml"
+#  /magazineSeries/search:
+#    $ref: "./magazine_series/path/magazineSeriesSearch.path.yaml"
+#  /material:
+#    $ref: "./material/path/material.path.yaml"
+#  /material/search:
+#    $ref: "./material/path/materialSearch.path.yaml"
+#  /medicalCondition:
+#    $ref: "./medical_condition/path/medicalCondition.path.yaml"
+#  /medicalCondition/search:
+#    $ref: "./medical_condition/path/medicalConditionSearch.path.yaml"
+#  /movie:
+#    $ref: "./movie/path/movie.path.yaml"
+#  /movie/search:
+#    $ref: "./movie/path/movieSearch.path.yaml"
+#  /occupation:
+#    $ref: "./occupation/path/occupation.path.yaml"
+#  /occupation/search:
+#    $ref: "./occupation/path/occupationSearch.path.yaml"
+#  /organization:
+#    $ref: "./organization/path/organization.path.yaml"
+#  /organization/search:
+#    $ref: "./organization/path/organizationSearch.path.yaml"
+#  /performer:
+#    $ref: "./performer/path/performer.path.yaml"
+#  /performer/search:
+#    $ref: "./performer/path/performerSearch.path.yaml"
+#  /season:
+#    $ref: "./season/path/season.path.yaml"
+#  /season/search:
+#    $ref: "./season/path/seasonSearch.path.yaml"
+#  /series:
+#    $ref: "./series/path/series.path.yaml"
+#  /series/search:
+#    $ref: "./series/path/seriesSearch.path.yaml"
+#  /soundtrack:
+#    $ref: "./soundtrack/path/soundtrack.path.yaml"
+#  /soundtrack/search:
+#    $ref: "./soundtrack/path/soundtrackSearch.path.yaml"
+#  /spacecraft:
+#    $ref: "./spacecraft/path/spacecraft.path.yaml"
+#  /spacecraft/search:
+#    $ref: "./spacecraft/path/spacecraftSearch.path.yaml"
+#  /spacecraftClass:
+#    $ref: "./spacecraft_class/path/spacecraftClass.path.yaml"
+#  /spacecraftClass/search:
+#    $ref: "./spacecraft_class/path/spacecraftClassSearch.path.yaml"
+#  /species:
+#    $ref: "./species/path/species.path.yaml"
+#  /species/search:
+#    $ref: "./species/path/speciesSearch.path.yaml"
+#  /staff:
+#    $ref: "./staff/path/staff.path.yaml"
+#  /staff/search:
+#    $ref: "./staff/path/staffSearch.path.yaml"
+#  /technology:
+#    $ref: "./technology/path/technology.path.yaml"
+#  /technology/search:
+#    $ref: "./technology/path/technologySearch.path.yaml"
+#  /title:
+#    $ref: "./title/path/title.path.yaml"
+#  /title/search:
+#    $ref: "./title/path/titleSearch.path.yaml"
+#  /tradingCard:
+#    $ref: "./trading_card/path/tradingCard.path.yaml"
+#  /tradingCard/search:
+#    $ref: "./trading_card/path/tradingCardSearch.path.yaml"
+#  /tradingCardDeck:
+#    $ref: "./trading_card_deck/path/tradingCardDeck.path.yaml"
+#  /tradingCardDeck/search:
+#    $ref: "./trading_card_deck/path/tradingCardDeckSearch.path.yaml"
+#  /tradingCardSet:
+#    $ref: "./trading_card_set/path/tradingCardSet.path.yaml"
+#  /tradingCardSet/search:
+#    $ref: "./trading_card_set/path/tradingCardSetSearch.path.yaml"
+#  /videoGame:
+#    $ref: "./video_game/path/videoGame.path.yaml"
+#  /videoGame/search:
+#    $ref: "./video_game/path/videoGameSearch.path.yaml"
+#  /videoRelease:
+#    $ref: "./video_release/path/videoRelease.path.yaml"
+#  /videoRelease/search:
+#    $ref: "./video_release/path/videoReleaseSearch.path.yaml"
+#  /weapon:
+#    $ref: "./weapon/path/weapon.path.yaml"
+#  /weapon/search:
+#    $ref: "./weapon/path/weaponSearch.path.yaml"
+definitions:
+  AnimalHeader:
+    type: object
+    description: Header animal, embedded in other objects
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Animal unique ID
+      name:
+        type: string
+        required: true
+        description: Animal name
+  AnimalBase:
+    type: object
+    description: Base animal, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Animal unique ID
+      name:
+        type: string
+        required: true
+        description: Animal name
+      earthAnimal:
+        type: boolean
+        description: Whether it's an earth animal
+      earthInsect:
+        type: boolean
+        description: Whether it's an earth insect
+      avian:
+        type: boolean
+        description: Whether it's an avian
+      canine:
+        type: boolean
+        description: Whether it's a canine
+      feline:
+        type: boolean
+        description: Whether it's a feline
+  AnimalFull:
+    type: object
+    description: Full animal, returned when queried using UID
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Animal unique ID
+      name:
+        type: string
+        required: true
+        description: Animal name
+      earthAnimal:
+        type: boolean
+        description: Whether it's an earth animal
+      earthInsect:
+        type: boolean
+        description: Whether it's an earth insect
+      avian:
+        type: boolean
+        description: Whether it's an avian
+      canine:
+        type: boolean
+        description: Whether it's a canine
+      feline:
+        type: boolean
+        description: Whether it's a feline
+  AnimalBaseResponse:
+    type: object
+    description: Response object for animals search
+    properties:
+      page:
+        $ref: '#/definitions/ResponsePage'
+        description: Response page
+      sort:
+        $ref: '#/definitions/ResponseSort'
+        description: Response sort
+      animals:
+        type: array
+        items:
+          $ref: '#/definitions/AnimalBase'
+        description: List of animals matching given criteria
+  AnimalFullResponse:
+    description: Response object for single animal query
+    properties:
+      animal:
+        $ref: '#/definitions/AnimalFull'
+        description: Animal, if found
+  AstronomicalObjectHeader:
+    type: object
+    description: Header astronomical object, embedded in other objects
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Astronomical object's unique ID
+      name:
+        type: string
+        required: true
+        description: Astronomical object name
+  AstronomicalObjectBase:
+    description: Base astronomical object, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Astronomical object's unique ID
+      name:
+        type: string
+        required: true
+        description: Astronomical object name
+      astronomicalObjectType:
+        $ref: '#/definitions/AstronomicalObjectType'
+        required: true
+        description: Type of astronomical object
+      location:
+        $ref: '#/definitions/AstronomicalObjectHeader'
+        description: Location of astronomical object (optional)
+  AstronomicalObjectFull:
+    type: object
+    description: Full astronomical object, returned when queried using UID
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Astronomical object's unique ID
+      name:
+        type: string
+        required: true
+        description: Astronomical object name
+      astronomicalObjectType:
+        $ref: '#/definitions/AstronomicalObjectType'
+        required: true
+        description: Type of astronomical object
+      location:
+        $ref: '#/definitions/AstronomicalObjectBase'
+        description: Location of astronomical object (optional)
+      astronomicalObjects:
+        type: array
+        items:
+          $ref: '#/definitions/AstronomicalObjectBase'
+        description: Astronomical objects located in this astronomical object, like planets in a star system
+  AstronomicalObjectBaseResponse:
+    type: object
+    description: Response object for astronomical objects search
+    properties:
+      page:
+        $ref: '#/definitions/ResponsePage'
+        description: Response page
+      sort:
+        $ref: '#/definitions/ResponseSort'
+        description: Response sort
+      astronomicalObjects:
+        type: array
+        items:
+          $ref: '#/definitions/AstronomicalObjectBase'
+        description: List of astronomical objects matching given criteria
+  AstronomicalObjectFullResponse:
+    type: object
+    description: Response object for single astronomical object query
+    properties:
+      astronomicalObject:
+        $ref: '#/definitions/AstronomicalObjectFull'
+        description: Astronomical object, if found
+  AstronomicalObjectType:
+    type: string
+    description: Astronomical object type
+    enum:
+      - PLANET
+      - D_CLASS_PLANET
+      - H_CLASS_PLANET
+      - GAS_GIANT_PLANET
+      - K_CLASS_PLANET
+      - L_CLASS_PLANET
+      - M_CLASS_PLANET
+      - Y_CLASS_PLANET
+      - ROGUE_PLANET
+      - ARTIFICIAL_PLANET
+      - ASTEROID
+      - ASTEROIDAL_MOON
+      - ASTEROID_BELT
+      - CLUSTER
+      - COMET
+      - CONSTELLATION
+      - GALAXY
+      - MOON
+      - M_CLASS_MOON
+      - NEBULA
+      - PLANETOID
+      - D_CLASS_PLANETOID
+      - QUASAR
+      - STAR
+      - STAR_SYSTEM
+      - SECTOR
+      - REGION
+  BloodType:
+    type: string
+    description: Blood type
+    enum:
+      - B_NEGATIVE
+      - O_NEGATIVE
+      - T_NEGATIVE
+  BookHeader:
+    type: object
+    description: Header book, embedded in other objects
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Book unique ID
+      title:
+        type: string
+        required: true
+        description: Book title
+  BookBase:
+    type: object
+    description: Base book, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Book unique ID
+      title:
+        type: string
+        required: true
+        description: Book title
+      publishedYear:
+        type: integer
+        description: Year the book was published
+      publishedMonth:
+        type: integer
+        description: Month the book was published
+      publishedDay:
+        type: integer
+        description: Day the book was published
+      numberOfPages:
+        type: integer
+        description: Number of pages
+      stardateFrom:
+        type: number
+        format: float
+        description: Starting stardate of book story
+      stardateTo:
+        type: number
+        description: Ending stardate of book story
+        format: float
+      yearFrom:
+        type: integer
+        description: Starting year of book story
+      yearTo:
+        type: integer
+        description: Ending year of book story
+      novel:
+        type: boolean
+        required: true
+        description: Whether it's a novel
+      referenceBook:
+        type: boolean
+        required: true
+        description: Whether it's a reference book
+      biographyBook:
+        type: boolean
+        required: true
+        description: Whether it's a biography book
+      rolePlayingBook:
+        type: boolean
+        required: true
+        description: Whether it's a role playing book
+      eBook:
+        type: boolean
+        required: true
+        description: Whether it's an eBook
+      anthology:
+        type: boolean
+        required: true
+        description: Whether it's an anthology
+      novelization:
+        type: boolean
+        required: true
+        description: Whether it's a novelization
+      audiobook:
+        type: boolean
+        required: true
+        description: Whether it's an audiobook, or has been release as an audiobook in addition to other form
+      audiobookAbridged:
+        type: boolean
+        required: true
+        description: If it's an audiobook, whether it's been abridged
+      audiobookPublishedYear:
+        type: integer
+        description: Year the audiobook was published
+      audiobookPublishedMonth:
+        type: integer
+        description: Month the audiobook was published
+      audiobookPublishedDay:
+        type: integer
+        description: Day the audiobook was published
+      audiobookRunTime:
+        type: integer
+        description: Audiobook run time, in minutes
+      productionNumber:
+        type: string
+        description: Book's production number
+  BookFull:
+    type: object
+    description: Full book, returned when queried using UID
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Book unique ID
+      title:
+        type: string
+        required: true
+        description: Book title
+      publishedYear:
+        type: integer
+        description: Year the book was published
+      publishedMonth:
+        type: integer
+        description: Month the book was published
+      publishedDay:
+        type: integer
+        description: Day the book was published
+      numberOfPages:
+        type: integer
+        description: Number of pages
+      stardateFrom:
+        type: number
+        format: float
+        description: Starting stardate of book story
+      stardateTo:
+        type: number
+        description: Ending stardate of book story
+        format: float
+      yearFrom:
+        type: integer
+        description: Starting year of book story
+      yearTo:
+        type: integer
+        description: Ending year of book story
+      novel:
+        type: boolean
+        required: true
+        description: Whether it's a novel
+      referenceBook:
+        type: boolean
+        required: true
+        description: Whether it's a reference book
+      biographyBook:
+        type: boolean
+        required: true
+        description: Whether it's a biography book
+      rolePlayingBook:
+        type: boolean
+        required: true
+        description: Whether it's a role playing book
+      eBook:
+        type: boolean
+        required: true
+        description: Whether it's an e-book
+      anthology:
+        type: boolean
+        required: true
+        description: Whether it's an anthology
+      novelization:
+        type: boolean
+        required: true
+        description: Whether it's a novelization
+      audiobook:
+        type: boolean
+        required: true
+        description: Whether it's an audiobook, or has been release as an audiobook in addition to other form
+      audiobookAbridged:
+        type: boolean
+        required: true
+        description: If it's an audiobook, whether it's been abridged
+      audiobookPublishedYear:
+        type: integer
+        description: Year the audiobook was published
+      audiobookPublishedMonth:
+        type: integer
+        description: Month the audiobook was published
+      audiobookPublishedDay:
+        type: integer
+        description: Day the audiobook was published
+      audiobookRunTime:
+        type: integer
+        description: Audiobook run time, in minutes
+      productionNumber:
+        type: string
+        description: Book production number
+      bookSeries:
+        type: array
+        items:
+          $ref: '#/definitions/BookSeriesBase'
+        description: Book series this book is included in
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Authors of the book
+      artists:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Artists involved in the book
+      editors:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Editors involved in the book
+      audiobookNarrators:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Audiobook narrators
+      publishers:
+        type: array
+        items:
+          $ref: '#/definitions/CompanyBase'
+        description: Book publishers
+      audiobookPublishers:
+        type: array
+        items:
+          $ref: '#/definitions/CompanyBase'
+        description: Audiobook publishers
+      characters:
+        type: array
+        items:
+          $ref: '#/definitions/CharacterBase'
+        description: Characters appearing the book
+      references:
+        type: array
+        items:
+          $ref: '#/definitions/Reference'
+        description: References
+      audiobookReferences:
+        type: array
+        items:
+          $ref: '#/definitions/Reference'
+        description: Audiobook references
+      bookCollections:
+        type: array
+        items:
+          $ref: '#/definitions/BookCollectionBase'
+        description: Book collections this book is included in
+  BookBaseResponse:
+    type: object
+    description: Response object for books search
+    properties:
+      page:
+        $ref: '#/definitions/ResponsePage'
+        description: Response page
+      sort:
+        $ref: '#/definitions/ResponseSort'
+        description: Response sort
+      books:
+        type: array
+        items:
+          $ref: '#/definitions/BookBase'
+        description: List of books matching given criteria
+  BookFullResponse:
+    type: object
+    description: Response object for single book query
+    properties:
+      book:
+        $ref: '#/definitions/BookFull'
+        description: Book, if found
+  BookCollectionHeader:
+    type: object
+    description: Header book collection, embedded in other objects
+    properties:
+      uid:
+        type: string
+        description: Book collection unique ID
+      title:
+        type: string
+        description: Book collection title
+  BookCollectionBase:
+    type: object
+    description: Base book collection, returned in search results
+    properties:
+      uid:
+        type: string
+        description: Book collection unique ID
+      title:
+        type: string
+        description: Book collection title
+      publishedYear:
+        type: integer
+        description: Year the book collection was published
+      publishedMonth:
+        type: integer
+        description: Month the book collection was published
+      publishedDay:
+        type: integer
+        description: Day the book collection was published
+      numberOfPages:
+        type: integer
+        description: Number of pages
+      stardateFrom:
+        type: number
+        format: float
+        description: Starting stardate of book collection stories
+      stardateTo:
+        type: number
+        format: float
+        description: Ending stardate of book collection stories
+      yearFrom:
+        type: integer
+        description: Starting year of book collection stories
+      yearTo:
+        type: integer
+        description: Ending year of book collection stories
+  BookCollectionFull:
+    type: object
+    description: Full book collection, returned when queried using UID
+    properties:
+      uid:
+        type: string
+        description: Book collection unique ID
+      title:
+        type: string
+        description: Book collection title
+      publishedYear:
+        type: integer
+        description: Year the book collection was published
+      publishedMonth:
+        type: integer
+        description: Month the book collection was published
+      publishedDay:
+        type: integer
+        description: Day the book collection was published
+      numberOfPages:
+        type: integer
+        description: Number of pages
+      stardateFrom:
+        type: number
+        format: float
+        description: Starting stardate of book collection stories
+      stardateTo:
+        type: number
+        description: Ending stardate of book collection stories
+        format: float
+      yearFrom:
+        type: integer
+        description: Starting year of book collection stories
+      yearTo:
+        type: integer
+        description: Ending year of book collection stories
+      bookSeries:
+        type: array
+        items:
+          $ref: '#/definitions/BookSeriesBase'
+        description: Book series this book collection is included in
+      authors:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Authors of the book collection
+      artists:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Artists involved in the book collection
+      editors:
+        type: array
+        items:
+          $ref: '#/definitions/StaffBase'
+        description: Editors involved in the book collection
+      publishers:
+        type: array
+        items:
+          $ref: '#/definitions/CompanyBase'
+        description: Book collection publishers
+      characters:
+        type: array
+        items:
+          $ref: '#/definitions/CharacterBase'
+        description: Characters appearing in the book collection
+      references:
+        type: array
+        items:
+          $ref: '#/definitions/Reference'
+        description: References
+      books:
+        type: array
+        items:
+          $ref: '#/definitions/BookBase'
+        description: Books included in this book collection
+  BookCollectionBaseResponse:
+    type: object
+    description: Response object for book collections search
+    properties:
+      page:
+        $ref: '#/definitions/ResponsePage'
+        description: Response page
+      sort:
+        $ref: '#/definitions/ResponseSort'
+        description: Response sort
+      bookCollections:
+        type: array
+        items:
+          $ref: '#/definitions/BookCollectionBase'
+        description: List of book collections matching given criteria
+  BookCollectionFullResponse:
+    type: object
+    description: Response object for single book collection query
+    properties:
+      bookCollection:
+        $ref: '#/definitions/BookCollectionFull'
+        description: Book collection, if found
+  BookSeriesHeader:
+    type: object
+    description: Header book series, embedded in other objects
+    properties:
+      uid:
+        type: string
+        description: Book series unique ID
+      title:
+        type: string
+        description: Book series title
+  BookSeriesBase:
+    type: object
+    description: Base book series, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Book series unique ID
+      title:
+        type: string
+        required: true
+        description: Book series title
+      publishedYearFrom:
+        type: integer
+        description: Year from which the book series was published
+      publishedMonthFrom:
+        type: integer
+        description: Month from which the book series was published
+      publishedYearTo:
+        type: integer
+        description: Year to which the book series was published
+      publishedMonthTo:
+        type: integer
+        description: Month to which the book series was published
+      numberOfBooks:
+        type: integer
+        description: Number of pages
+      yearFrom:
+        type: integer
+        description: Starting year of book series stories
+      yearTo:
+        type: integer
+        description: Ending year of book series stories
+      miniseries:
+        type: boolean
+        description: Whether it's a miniseries
+      eBookSeries:
+        type: boolean
+        description: Whether it's a e-book series
+  BookSeriesFull:
+    type: object
+    description: Full book series, returned when queried using UID
+    properties:
+      uid:
+        type: string
+        description: Book series unique ID
+        required: true
+      title:
+        type: string
+        description: Book series title
+        required: true
+      publishedYearFrom:
+        type: integer
+        description: Year from which the book series was published
+      publishedMonthFrom:
+        type: integer
+        description: Month from which the book series was published
+      publishedYearTo:
+        type: integer
+        description: Year to which the book series was published
+      publishedMonthTo:
+        type: integer
+        description: Month to which the book series was published
+      numberOfBooks:
+        type: integer
+        description: Number of books in book series
+      yearFrom:
+        type: integer
+        description: Starting year of book series stories
+      yearTo:
+        type: integer
+        description: Ending year of book series stories
+      miniseries:
+        type: boolean
+        description: Whether it's a miniseries
+      eBookSeries:
+        type: boolean
+        description: Whether it's a e-book series
+      parentSeries:
+        type: array
+        items:
+          $ref: '#/definitions/BookSeriesBase'
+        description: Book series this book series is included in
+      childSeries:
+        type: array
+        items:
+          $ref: '#/definitions/BookSeriesBase'
+        description: Child book series included in this book series
+      publishers:
+        type: array
+        items:
+          $ref: '#/definitions/CompanyBase'
+        description: Companies that published this book series
+      books:
+        type: array
+        items:
+          $ref: '#/definitions/BookBase'
+        description: Books included in this book series
+  BookSeriesBaseResponse:
+    type: object
+    description: Response object for book series search
+    properties:
+      page:
+        $ref: '#/definitions/ResponsePage'
+        description: Response page
+      sort:
+        $ref: '#/definitions/ResponseSort'
+        description: Response sort
+      bookSeries:
+        type: array
+        items:
+          $ref: '#/definitions/BookSeriesBase'
+        description: List of book series matching given criteria
+  BookSeriesFullResponse:
+    type: object
+    description: Response object for single book series query
+    properties:
+      bookSeries:
+        $ref: '#/definitions/BookSeriesFull'
+        description: Book series, if found
+#  CharacterHeader:
+#    $ref: "./character/entity/characterHeader.yaml"
+  CharacterBase:
+    type: object
+    description: Base character, returned in search results
+    properties:
+      uid:
+        type: string
+        description: Character unique ID
+        required: true
+      name:
+        type: string
+        description: Character name
+        required: true
+      gender:
+        $ref: '#/definitions/Gender'
+        description: Character gender
+      yearOfBirth:
+        type: integer
+        description: Year the character was born
+      monthOfBirth:
+        type: integer
+        description: Month the character was born
+      dayOfBirth:
+        type: integer
+        description: Day the character was born
+      placeOfBirth:
+        type: string
+        description: Place of birth
+      yearOfDeath:
+        type: integer
+        description: Year the character died
+      monthOfDeath:
+        type: integer
+        description: Month the character died
+      dayOfDeath:
+        type: integer
+        description: Day the character died
+      placeOfDeath:
+        type: string
+        description: Place of death
+      height:
+        type: integer
+        description: Height in centimeters
+      weight:
+        type: integer
+        description: Weight in kilograms
+      deceased:
+        type: boolean
+        description: Whether this character is deceased
+      bloodType:
+        $ref: '#/definitions/BloodType'
+        description: Blood type
+      maritalStatus:
+        $ref: '#/definitions/MaritalStatus'
+        description: Marital status
+      serialNumber:
+        type: string
+        description: Serial number
+      hologramActivationDate:
+        type: string
+        description: Hologram activation date
+      hologramStatus:
+        type: string
+        description: Hologram status
+      hologramDateStatus:
+        type: string
+        description: Hologram date status
+      hologram:
+        type: boolean
+        description: Whether this character is a hologram
+      fictionalCharacter:
+        type: boolean
+        description: Whether this character is a fictional character (from universe point of view)
+      mirror:
+        type: boolean
+        description: Whether this character is from mirror universe
+      alternateReality:
+        type: boolean
+        description: Whether this character is from alternate reality
+#  CharacterFull:
+#    $ref: "./character/entity/characterFull.yaml"
+#  CharacterBaseResponse:
+#    $ref: "./character/entity/characterBaseResponse.yaml"
+#  CharacterFullResponse:
+#    $ref: "./character/entity/characterFullResponse.yaml"
+#  CharacterRelation:
+#    $ref: "./character/entity/characterRelation.yaml"
+#  CharacterSpecies:
+#    $ref: "./character/entity/characterSpecies.yaml"
+#  ComicsHeader:
+#    $ref: "./comics/entity/comicsHeader.yaml"
+#  ComicsBase:
+#    $ref: "./comics/entity/comicsBase.yaml"
+#  ComicsFull:
+#    $ref: "./comics/entity/comicsFull.yaml"
+#  ComicsBaseResponse:
+#    $ref: "./comics/entity/comicsBaseResponse.yaml"
+#  ComicsFullResponse:
+#    $ref: "./comics/entity/comicsFullResponse.yaml"
+#  ComicCollectionHeader:
+#    $ref: "./comic_collection/entity/comicCollectionHeader.yaml"
+#  ComicCollectionBase:
+#    $ref: "./comic_collection/entity/comicCollectionBase.yaml"
+#  ComicCollectionFull:
+#    $ref: "./comic_collection/entity/comicCollectionFull.yaml"
+#  ComicCollectionBaseResponse:
+#    $ref: "./comic_collection/entity/comicCollectionBaseResponse.yaml"
+#  ComicCollectionFullResponse:
+#    $ref: "./comic_collection/entity/comicCollectionFullResponse.yaml"
+#  ComicSeriesHeader:
+#    $ref: "./comic_series/entity/comicSeriesHeader.yaml"
+#  ComicSeriesBase:
+#    $ref: "./comic_series/entity/comicSeriesBase.yaml"
+#  ComicSeriesFull:
+#    $ref: "./comic_series/entity/comicSeriesFull.yaml"
+#  ComicSeriesBaseResponse:
+#    $ref: "./comic_series/entity/comicSeriesBaseResponse.yaml"
+#  ComicSeriesFullResponse:
+#    $ref: "./comic_series/entity/comicSeriesFullResponse.yaml"
+#  ComicStripHeader:
+#    $ref: "./comic_strip/entity/comicStripHeader.yaml"
+#  ComicStripBase:
+#    $ref: "./comic_strip/entity/comicStripBase.yaml"
+#  ComicStripFull:
+#    $ref: "./comic_strip/entity/comicStripFull.yaml"
+#  ComicStripBaseResponse:
+#    $ref: "./comic_strip/entity/comicStripBaseResponse.yaml"
+#  ComicStripFullResponse:
+#    $ref: "./comic_strip/entity/comicStripFullResponse.yaml"
+  CompanyBase:
+    type: object
+    description: Base company, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Company unique ID
+      name:
+        type: string
+        required: true
+        description: Company name
+      broadcaster:
+        type: boolean
+        description: Whether it's a broadcaster
+      collectibleCompany:
+        type: boolean
+        description: Whether it's a collectible company
+      conglomerate:
+        type: boolean
+        description: Whether it's a conglomerate
+      digitalVisualEffectsCompany:
+        type: boolean
+        description: Whether it's a digital visual effects company
+      distributor:
+        type: boolean
+        description: Whether it's a distributor
+      gameCompany:
+        type: boolean
+        description: Whether it's a game company
+      filmEquipmentCompany:
+        type: boolean
+        description: Whether it's a film equipment company
+      makeUpEffectsStudio:
+        type: boolean
+        description: Whether it's a make-up effects studio
+      mattePaintingCompany:
+        type: boolean
+        description: Whether it's a matte painting company
+      modelAndMiniatureEffectsCompany:
+        type: boolean
+        description: Whether it's a model and miniature effects company
+      postProductionCompany:
+        type: boolean
+        description: Whether it's a post-production company
+      productionCompany:
+        type: boolean
+        description: Whether it's a production company
+      propCompany:
+        type: boolean
+        description: Whether it's a prop company
+      recordLabel:
+        type: boolean
+        description: Whether it's a record label
+      specialEffectsCompany:
+        type: boolean
+        description: Whether it's a special effects company
+      tvAndFilmProductionCompany:
+        type: boolean
+        description: Whether it's a TV and film production company
+      videoGameCompany:
+        type: boolean
+        description: Whether it's a video game company
+#  CompanyFull:
+#    $ref: "./company/entity/companyFull.yaml"
+#  CompanyHeader:
+#    $ref: "./company/entity/companyHeader.yaml"
+#  CompanyBaseResponse:
+#    $ref: "./company/entity/companyBaseResponse.yaml"
+#  CompanyFullResponse:
+#    $ref: "./company/entity/companyFullResponse.yaml"
+#  ConflictBase:
+#    $ref: "./conflict/entity/conflictBase.yaml"
+#  ConflictFull:
+#    $ref: "./conflict/entity/conflictFull.yaml"
+#  ConflictHeader:
+#    $ref: "./conflict/entity/conflictHeader.yaml"
+#  ConflictBaseResponse:
+#    $ref: "./conflict/entity/conflictBaseResponse.yaml"
+#  ConflictFullResponse:
+#    $ref: "./conflict/entity/conflictFullResponse.yaml"
+#  ContentLanguage:
+#    $ref: "./content_language/entity/contentLanguage.yaml"
+#  ContentRatingSystem:
+#    $ref: "./content_rating/entity/enum/contentRatingSystem.yaml"
+#  ContentRating:
+#    $ref: "./content_rating/entity/contentRating.yaml"
+#  Country:
+#    $ref: "./country/entity/country.yaml"
+#  ElementHeader:
+#    $ref: "./element/entity/elementHeader.yaml"
+#  ElementBase:
+#    $ref: "./element/entity/elementBase.yaml"
+#  ElementFull:
+#    $ref: "./element/entity/elementFull.yaml"
+#  ElementBaseResponse:
+#    $ref: "./element/entity/elementBaseResponse.yaml"
+#  ElementFullResponse:
+#    $ref: "./element/entity/elementFullResponse.yaml"
+#  EpisodeHeader:
+#    $ref: "./episode/entity/episodeHeader.yaml"
+#  EpisodeBase:
+#    $ref: "./episode/entity/episodeBase.yaml"
+#  EpisodeFull:
+#    $ref: "./episode/entity/episodeFull.yaml"
+#  EpisodeBaseResponse:
+#    $ref: "./episode/entity/episodeBaseResponse.yaml"
+#  EpisodeFullResponse:
+#    $ref: "./episode/entity/episodeFullResponse.yaml"
+  Error:
+    type: object
+    description: Error object
+    properties:
+      code:
+        type: string
+        description: Error code
+      message:
+        type: string
+        description: Error message
+#  FoodHeader:
+#    $ref: "./food/entity/foodHeader.yaml"
+#  FoodBase:
+#    $ref: "./food/entity/foodBase.yaml"
+#  FoodFull:
+#    $ref: "./food/entity/foodFull.yaml"
+#  FoodBaseResponse:
+#    $ref: "./food/entity/foodBaseResponse.yaml"
+#  FoodFullResponse:
+#    $ref: "./food/entity/foodFullResponse.yaml"
+  Gender:
+    type: string
+    description: Gender
+    enum:
+      - F
+      - M
+#  Genre:
+#    $ref: "./genre/entity/genre.yaml"
+#  LiteratureHeader:
+#    $ref: "./literature/entity/literatureHeader.yaml"
+#  LiteratureBase:
+#    $ref: "./literature/entity/literatureBase.yaml"
+#  LiteratureFull:
+#    $ref: "./literature/entity/literatureFull.yaml"
+#  LiteratureBaseResponse:
+#    $ref: "./literature/entity/literatureBaseResponse.yaml"
+#  LiteratureFullResponse:
+#    $ref: "./literature/entity/literatureFullResponse.yaml"
+#  LocationHeader:
+#    $ref: "./location/entity/locationHeader.yaml"
+#  LocationBase:
+#    $ref: "./location/entity/locationBase.yaml"
+#  LocationFull:
+#    $ref: "./location/entity/locationFull.yaml"
+#  LocationBaseResponse:
+#    $ref: "./location/entity/locationBaseResponse.yaml"
+#  LocationFullResponse:
+#    $ref: "./location/entity/locationFullResponse.yaml"
+#  MagazineHeader:
+#    $ref: "./magazine/entity/magazineHeader.yaml"
+#  MagazineBase:
+#    $ref: "./magazine/entity/magazineBase.yaml"
+#  MagazineFull:
+#    $ref: "./magazine/entity/magazineFull.yaml"
+#  MagazineBaseResponse:
+#    $ref: "./magazine/entity/magazineBaseResponse.yaml"
+#  MagazineFullResponse:
+#    $ref: "./magazine/entity/magazineFullResponse.yaml"
+#  MagazineSeriesHeader:
+#    $ref: "./magazine_series/entity/magazineSeriesHeader.yaml"
+#  MagazineSeriesBase:
+#    $ref: "./magazine_series/entity/magazineSeriesBase.yaml"
+#  MagazineSeriesFull:
+#    $ref: "./magazine_series/entity/magazineSeriesFull.yaml"
+#  MagazineSeriesBaseResponse:
+#    $ref: "./magazine_series/entity/magazineSeriesBaseResponse.yaml"
+#  MagazineSeriesFullResponse:
+#    $ref: "./magazine_series/entity/magazineSeriesFullResponse.yaml"
+  MaritalStatus:
+    type: string
+    description: Marital status
+    enum:
+      - SINGLE
+      - ENGAGED
+      - MARRIED
+      - DIVORCED
+      - REMARRIED
+      - SEPARATED
+      - WIDOWED
+      - CAPTAINS_WOMAN
+#  MaterialHeader:
+#    $ref: "./material/entity/materialHeader.yaml"
+#  MaterialBase:
+#    $ref: "./material/entity/materialBase.yaml"
+#  MaterialFull:
+#    $ref: "./material/entity/materialFull.yaml"
+#  MaterialBaseResponse:
+#    $ref: "./material/entity/materialBaseResponse.yaml"
+#  MaterialFullResponse:
+#    $ref: "./material/entity/materialFullResponse.yaml"
+#  MedicalConditionHeader:
+#    $ref: "./medical_condition/entity/medicalConditionHeader.yaml"
+#  MedicalConditionBase:
+#    $ref: "./medical_condition/entity/medicalConditionBase.yaml"
+#  MedicalConditionFull:
+#    $ref: "./medical_condition/entity/medicalConditionFull.yaml"
+#  MedicalConditionBaseResponse:
+#    $ref: "./medical_condition/entity/medicalConditionBaseResponse.yaml"
+#  MedicalConditionFullResponse:
+#    $ref: "./medical_condition/entity/medicalConditionFullResponse.yaml"
+#  MovieHeader:
+#    $ref: "./movie/entity/movieHeader.yaml"
+#  MovieBase:
+#    $ref: "./movie/entity/movieBase.yaml"
+#  MovieFull:
+#    $ref: "./movie/entity/movieFull.yaml"
+#  MovieBaseResponse:
+#    $ref: "./movie/entity/movieBaseResponse.yaml"
+#  MovieFullResponse:
+#    $ref: "./movie/entity/movieFullResponse.yaml"
+#  OccupationHeader:
+#    $ref: "./occupation/entity/occupationHeader.yaml"
+#  OccupationBase:
+#    $ref: "./occupation/entity/occupationBase.yaml"
+#  OccupationFull:
+#    $ref: "./occupation/entity/occupationFull.yaml"
+#  OccupationBaseResponse:
+#    $ref: "./occupation/entity/occupationBaseResponse.yaml"
+#  OccupationFullResponse:
+#    $ref: "./occupation/entity/occupationFullResponse.yaml"
+#  OrganizationHeader:
+#    $ref: "./organization/entity/organizationHeader.yaml"
+#  OrganizationBase:
+#    $ref: "./organization/entity/organizationBase.yaml"
+#  OrganizationFull:
+#    $ref: "./organization/entity/organizationFull.yaml"
+#  OrganizationBaseResponse:
+#    $ref: "./organization/entity/organizationBaseResponse.yaml"
+#  OrganizationFullResponse:
+#    $ref: "./organization/entity/organizationFullResponse.yaml"
+#  PerformerHeader:
+#    $ref: "./performer/entity/performerHeader.yaml"
+#  PerformerBase:
+#    $ref: "./performer/entity/performerBase.yaml"
+#  PerformerFull:
+#    $ref: "./performer/entity/performerFull.yaml"
+#  PerformerBaseResponse:
+#    $ref: "./performer/entity/performerBaseResponse.yaml"
+#  PerformerFullResponse:
+#    $ref: "./performer/entity/performerFullResponse.yaml"
+#  Platform:
+#    $ref: "./platform/entity/platform.yaml"
+#  ProductionRunUnit:
+#    $ref: "./trading_card_set/entity/enum/productionRunUnit.yaml"
+  Reference:
+    type: object
+    description: Reference of book, comics, video release, etc.
+    properties:
+      uid:
+        type: string
+        description: Reference unique ID
+      referenceType:
+        $ref: '#/definitions/ReferenceType'
+        description: Reference type
+      referenceNumber:
+        type: string
+        description: Reference number
+  ReferenceType:
+    type: string
+    description: Reference type
+    enum:
+      - ASIN
+      - ISBN
+  ResponsePage:
+    type: object
+    description: Object describing response page
+    properties:
+      pageNumber:
+        type: integer
+        format: int32
+        description: Zero-based page number
+      pageSize:
+        type: integer
+        format: int32
+        description: Page size
+      numberOfElements:
+        type: integer
+        format: int32
+        description: Number of elements in page
+      totalElements:
+        type: integer
+        format: int32
+        description: Total elements found
+      totalPages:
+        type: integer
+        format: int32
+        description: Total pages found
+      firstPage:
+        type: boolean
+        description: Whether it is the first page
+      lastPage:
+        type: boolean
+        description: Whether it is the last page
+  ResponseSort:
+    type: object
+    description: Response sort
+    properties:
+      clauses:
+        type: array
+        items:
+          $ref: '#/definitions/ResponseSortClause'
+        description: List of response sort rules
+  ResponseSortClause:
+    type: object
+    description: Single response sort clause
+    properties:
+      name:
+        type: string
+        required: true
+        description: Field name results are sorted by
+      direction:
+        $ref: '#/definitions/ResponseSortDirection'
+        required: true
+        description: Sort direction
+      clauseOrder:
+        type: integer
+        required: true
+        description: Order in which this clause was applied
+  ResponseSortDirection:
+    type: string
+    description: Sort direction
+    enum:
+      - ASC
+      - DESC
+#  SeasonHeader:
+#    $ref: "./season/entity/seasonHeader.yaml"
+#  SeasonBase:
+#    $ref: "./season/entity/seasonBase.yaml"
+#  SeasonFull:
+#    $ref: "./season/entity/seasonFull.yaml"
+#  SeasonBaseResponse:
+#    $ref: "./season/entity/seasonBaseResponse.yaml"
+#  SeasonFullResponse:
+#    $ref: "./season/entity/seasonFullResponse.yaml"
+#  SeriesHeader:
+#    $ref: "./series/entity/seriesHeader.yaml"
+#  SeriesBase:
+#    $ref: "./series/entity/seriesBase.yaml"
+#  SeriesFull:
+#    $ref: "./series/entity/seriesFull.yaml"
+#  SeriesBaseResponse:
+#    $ref: "./series/entity/seriesBaseResponse.yaml"
+#  SeriesFullResponse:
+#    $ref: "./series/entity/seriesFullResponse.yaml"
+#  SoundtrackHeader:
+#    $ref: "./soundtrack/entity/soundtrackHeader.yaml"
+#  SoundtrackBase:
+#    $ref: "./soundtrack/entity/soundtrackBase.yaml"
+#  SoundtrackFull:
+#    $ref: "./soundtrack/entity/soundtrackFull.yaml"
+#  SoundtrackBaseResponse:
+#    $ref: "./soundtrack/entity/soundtrackBaseResponse.yaml"
+#  SoundtrackFullResponse:
+#    $ref: "./soundtrack/entity/soundtrackFullResponse.yaml"
+#  SpacecraftHeader:
+#    $ref: "./spacecraft/entity/spacecraftHeader.yaml"
+#  SpacecraftBase:
+#    $ref: "./spacecraft/entity/spacecraftBase.yaml"
+#  SpacecraftFull:
+#    $ref: "./spacecraft/entity/spacecraftFull.yaml"
+#  SpacecraftBaseResponse:
+#    $ref: "./spacecraft/entity/spacecraftBaseResponse.yaml"
+#  SpacecraftFullResponse:
+#    $ref: "./spacecraft/entity/spacecraftFullResponse.yaml"
+#  SpacecraftClassHeader:
+#    $ref: "./spacecraft_class/entity/spacecraftClassHeader.yaml"
+#  SpacecraftClassBase:
+#    $ref: "./spacecraft_class/entity/spacecraftClassBase.yaml"
+#  SpacecraftClassFull:
+#    $ref: "./spacecraft_class/entity/spacecraftClassFull.yaml"
+#  SpacecraftClassBaseResponse:
+#    $ref: "./spacecraft_class/entity/spacecraftClassBaseResponse.yaml"
+#  SpacecraftClassFullResponse:
+#    $ref: "./spacecraft_class/entity/spacecraftClassFullResponse.yaml"
+#  SpacecraftType:
+#    $ref: "./spacecraft_type/entity/spacecraftType.yaml"
+#  SpeciesHeader:
+#    $ref: "./species/entity/speciesHeader.yaml"
+#  SpeciesBase:
+#    $ref: "./species/entity/speciesBase.yaml"
+#  SpeciesFull:
+#    $ref: "./species/entity/speciesFull.yaml"
+#  SpeciesBaseResponse:
+#    $ref: "./species/entity/speciesBaseResponse.yaml"
+#  SpeciesFullResponse:
+#    $ref: "./species/entity/speciesFullResponse.yaml"
+#  StaffHeader:
+#    $ref: "./staff/entity/staffHeader.yaml"
+  StaffBase:
+    type: object
+    description: Base staff, returned in search results
+    properties:
+      uid:
+        type: string
+        required: true
+        description: Staff unique ID
+      name:
+        type: string
+        required: true
+        description: Staff name
+      birthName:
+        type: string
+        description: Staff birth name
+      gender:
+        $ref: '#/definitions/Gender'
+        description: Staff gender
+      dateOfBirth:
+        type: string
+        format: date
+        description: Date the staff was born
+      placeOfBirth:
+        type: string
+        description: Place the staff was born
+      dateOfDeath:
+        type: string
+        format: date
+        description: Date the staff died
+      placeOfDeath:
+        type: string
+        description: Place the staff died
+      artDepartment:
+        type: boolean
+        description: Whether this person if from art department
+      artDirector:
+        type: boolean
+        description: Whether this person is an art director
+      productionDesigner:
+        type: boolean
+        description: Whether this person is a production designer
+      cameraAndElectricalDepartment:
+        type: boolean
+        description: Whether this person is from camera and electrical department
+      cinematographer:
+        type: boolean
+        description: Whether this person is a cinematographer
+      castingDepartment:
+        type: boolean
+        description: Whether this person is from casting department
+      costumeDepartment:
+        type: boolean
+        description: Whether this person is from costume department
+      costumeDesigner:
+        type: boolean
+        description: Whether this person is a custume designer
+      director:
+        type: boolean
+        description: Whether this person is a director
+      assistantOrSecondUnitDirector:
+        type: boolean
+        description: Whether this person is an assistant or secound unit director director
+      exhibitAndAttractionStaff:
+        type: boolean
+        description: Whether this person is an exhibit and tttraction staff
+      filmEditor:
+        type: boolean
+        description: Whether this person is a film editor
+      linguist:
+        type: boolean
+        description: Whether this person is a linguist
+      locationStaff:
+        type: boolean
+        description: Whether this person is a location staff
+      makeupStaff:
+        type: boolean
+        description: Whether this person is a make-up staff
+      musicDepartment:
+        type: boolean
+        description: Whether this person is from music department
+      composer:
+        type: boolean
+        description: Whether this person is a composer
+      personalAssistant:
+        type: boolean
+        description: Whether this person is a personal assistant
+      producer:
+        type: boolean
+        description: Whether this person is a producer
+      productionAssociate:
+        type: boolean
+        description: Whether this person is a production associate
+      productionStaff:
+        type: boolean
+        description: Whether this person is a production staff
+      publicationStaff:
+        type: boolean
+        description: Whether this person is a publication staff
+      scienceConsultant:
+        type: boolean
+        description: Whether this person is a science consultant
+      soundDepartment:
+        type: boolean
+        description: Whether this person is from sound department
+      specialAndVisualEffectsStaff:
+        type: boolean
+        description: Whether this person is a special and visual effects staff
+      author:
+        type: boolean
+        description: Whether this person is an author
+      audioAuthor:
+        type: boolean
+        description: Whether this person is an audio author
+      calendarArtist:
+        type: boolean
+        description: Whether this person is a calendar artist
+      comicArtist:
+        type: boolean
+        description: Whether this person is a comic artist
+      comicAuthor:
+        type: boolean
+        description: Whether this person is a comic author
+      comicColorArtist:
+        type: boolean
+        description: Whether this person is a comic color artist
+      comicInteriorArtist:
+        type: boolean
+        description: Whether this person is a comic interior artist
+      comicInkArtist:
+        type: boolean
+        description: Whether this person is a comic ink artist
+      comicPencilArtist:
+        type: boolean
+        description: Whether this person is a comic pencil artist
+      comicLetterArtist:
+        type: boolean
+        description: Whether this person is a comic letter artist
+      comicStripArtist:
+        type: boolean
+        description: Whether this person is a comic strip artist
+      gameArtist:
+        type: boolean
+        description: Whether this person is a game artist
+      gameAuthor:
+        type: boolean
+        description: Whether this person is a game author
+      novelArtist:
+        type: boolean
+        description: Whether this person is a novel artist
+      novelAuthor:
+        type: boolean
+        description: Whether this person is a novel author
+      referenceArtist:
+        type: boolean
+        description: Whether this person is a reference artist
+      referenceAuthor:
+        type: boolean
+        description: Whether this person is a reference author
+      publicationArtist:
+        type: boolean
+        description: Whether this person is a publication artist
+      publicationDesigner:
+        type: boolean
+        description: Whether this person is a publication designer
+      publicationEditor:
+        type: boolean
+        description: Whether this person is a publication editor
+      publicityArtist:
+        type: boolean
+        description: Whether this person is a publication artist
+      cbsDigitalStaff:
+        type: boolean
+        description: Whether this person is a part of CBS digital staff
+      ilmProductionStaff:
+        type: boolean
+        description: Whether this person is a part of ILM production staff
+      specialFeaturesStaff:
+        type: boolean
+        description: Whether this person is a special features artist
+      storyEditor:
+        type: boolean
+        description: Whether this person is a story editor
+      studioExecutive:
+        type: boolean
+        description: Whether this person is a studio executive
+      stuntDepartment:
+        type: boolean
+        description: Whether this person is from stunt department
+      transportationDepartment:
+        type: boolean
+        description: Whether this person is from transportation department
+      videoGameProductionStaff:
+        type: boolean
+        description: Whether this person is video game production staff
+      writer:
+        type: boolean
+        description: Whether this person is a writer
+#  StaffFull:
+#    $ref: "./staff/entity/staffFull.yaml"
+#  StaffBaseResponse:
+#    $ref: "./staff/entity/staffBaseResponse.yaml"
+#  StaffFullResponse:
+#    $ref: "./staff/entity/staffFullResponse.yaml"
+#  TechnologyHeader:
+#    $ref: "./technology/entity/technologyHeader.yaml"
+#  TechnologyBase:
+#    $ref: "./technology/entity/technologyBase.yaml"
+#  TechnologyFull:
+#    $ref: "./technology/entity/technologyFull.yaml"
+#  TechnologyBaseResponse:
+#    $ref: "./technology/entity/technologyBaseResponse.yaml"
+#  TechnologyFullResponse:
+#    $ref: "./technology/entity/technologyFullResponse.yaml"
+#  TitleHeader:
+#    $ref: "./title/entity/titleHeader.yaml"
+#  TitleBase:
+#    $ref: "./title/entity/titleBase.yaml"
+#  TitleFull:
+#    $ref: "./title/entity/titleFull.yaml"
+#  TitleBaseResponse:
+#    $ref: "./title/entity/titleBaseResponse.yaml"
+#  TitleFullResponse:
+#    $ref: "./title/entity/titleFullResponse.yaml"
+#  TradingCardHeader:
+#    $ref: "./trading_card/entity/tradingCardHeader.yaml"
+#  TradingCardBase:
+#    $ref: "./trading_card/entity/tradingCardBase.yaml"
+#  TradingCardFull:
+#    $ref: "./trading_card/entity/tradingCardFull.yaml"
+#  TradingCardBaseResponse:
+#    $ref: "./trading_card/entity/tradingCardBaseResponse.yaml"
+#  TradingCardFullResponse:
+#    $ref: "./trading_card/entity/tradingCardFullResponse.yaml"
+#  TradingCardDeckHeader:
+#    $ref: "./trading_card_deck/entity/tradingCardDeckHeader.yaml"
+#  TradingCardDeckBase:
+#    $ref: "./trading_card_deck/entity/tradingCardDeckBase.yaml"
+#  TradingCardDeckFull:
+#    $ref: "./trading_card_deck/entity/tradingCardDeckFull.yaml"
+#  TradingCardDeckBaseResponse:
+#    $ref: "./trading_card_deck/entity/tradingCardDeckBaseResponse.yaml"
+#  TradingCardDeckFullResponse:
+#    $ref: "./trading_card_deck/entity/tradingCardDeckFullResponse.yaml"
+#  TradingCardSetHeader:
+#    $ref: "./trading_card_set/entity/tradingCardSetHeader.yaml"
+#  TradingCardSetBase:
+#    $ref: "./trading_card_set/entity/tradingCardSetBase.yaml"
+#  TradingCardSetFull:
+#    $ref: "./trading_card_set/entity/tradingCardSetFull.yaml"
+#  TradingCardSetBaseResponse:
+#    $ref: "./trading_card_set/entity/tradingCardSetBaseResponse.yaml"
+#  TradingCardSetFullResponse:
+#    $ref: "./trading_card_set/entity/tradingCardSetFullResponse.yaml"
+#  VideoGameHeader:
+#    $ref: "./video_game/entity/videoGameHeader.yaml"
+#  VideoGameBase:
+#    $ref: "./video_game/entity/videoGameBase.yaml"
+#  VideoGameFull:
+#    $ref: "./video_game/entity/videoGameFull.yaml"
+#  VideoGameBaseResponse:
+#    $ref: "./video_game/entity/videoGameBaseResponse.yaml"
+#  VideoGameFullResponse:
+#    $ref: "./video_game/entity/videoGameFullResponse.yaml"
+#  VideoReleaseHeader:
+#    $ref: "./video_release/entity/videoReleaseHeader.yaml"
+#  VideoReleaseBase:
+#    $ref: "./video_release/entity/videoReleaseBase.yaml"
+#  VideoReleaseFormat:
+#    $ref: "./video_release/entity/enum/videoReleaseFormat.yaml"
+#  VideoReleaseFull:
+#    $ref: "./video_release/entity/videoReleaseFull.yaml"
+#  VideoReleaseBaseResponse:
+#    $ref: "./video_release/entity/videoReleaseBaseResponse.yaml"
+#  VideoReleaseFullResponse:
+#    $ref: "./video_release/entity/videoReleaseFullResponse.yaml"
+#  WeaponHeader:
+#    $ref: "./weapon/entity/weaponHeader.yaml"
+#  WeaponBase:
+#    $ref: "./weapon/entity/weaponBase.yaml"
+#  WeaponFull:
+#    $ref: "./weapon/entity/weaponFull.yaml"
+#  WeaponBaseResponse:
+#    $ref: "./weapon/entity/weaponBaseResponse.yaml"
+#  WeaponFullResponse:
+#    $ref: "./weapon/entity/weaponFullResponse.yaml"
+#

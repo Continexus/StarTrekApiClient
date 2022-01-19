@@ -1,0 +1,12 @@
+swagger: '2.0'
+type: object
+description: Header video game, embedded in other objects
+properties:
+  uid:
+    type: string
+    required: true
+    description: Video game unique ID
+  title:
+    type: string
+    required: true
+    description: Video game title

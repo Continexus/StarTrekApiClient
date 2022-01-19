@@ -1,0 +1,10 @@
+swagger: '2.0'
+type: object
+description: Genre of video games
+properties:
+  uid:
+    type: string
+    description: Genre unique ID
+  name:
+    type: string
+    description: Genre name
